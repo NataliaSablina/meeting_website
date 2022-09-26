@@ -37,9 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "user",
-
     "rest_framework",
 ]
 
@@ -118,7 +116,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'user.CustomUser'
+AUTH_USER_MODEL = "user.CustomUser"
 
 
 # Static files (CSS, JavaScript, Images)
