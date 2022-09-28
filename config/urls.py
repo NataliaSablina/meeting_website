@@ -23,6 +23,7 @@ from config.settings import base
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("user.urls")),
+    path("blog/", include("blog.urls")),
 ] + static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
 
 if os.getenv("BUILD_TYPE") == "DEV":
