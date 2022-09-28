@@ -14,14 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 import os
-
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+
+from config.settings import base
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("user.urls")),
-]
+] + static(base.MEDIA_URL, document_root=base.MEDIA_ROOT)
 
 if os.getenv("BUILD_TYPE") == "DEV":
     urlpatterns += [path("__debug__/", include("debug_toolbar.urls"))]

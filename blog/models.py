@@ -5,7 +5,9 @@ from userprofile.models import Profile
 
 
 class Blog(models.Model):
-    profile = models.OneToOneField(Profile, on_delete=models.CASCADE, verbose_name="profile", unique=True)
+    profile = models.OneToOneField(
+        Profile, on_delete=models.CASCADE, verbose_name="profile", unique=True
+    )
 
     class Meta:
         verbose_name = "Blog"
@@ -31,10 +33,14 @@ class Post(models.Model):
 
 
 class PostComment(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, verbose_name="user", null=True)
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.SET_NULL, verbose_name="user", null=True
+    )
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="post")
     content = models.TextField(verbose_name="content")
-    comment = models.ForeignKey('PostComment', on_delete=models.CASCADE, verbose_name="comment_on_comment")
+    comment = models.ForeignKey(
+        "PostComment", on_delete=models.CASCADE, verbose_name="comment_on_comment"
+    )
 
     class Meta:
         verbose_name = "PostComment"
@@ -43,4 +49,3 @@ class PostComment(models.Model):
 
     def __str__(self):
         return f"{self.post}_comment_{self.pk}"
-

@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
+from album.models import Album
 from blog.models import Blog
+from form.models import Form
 from user.models import CustomUser
 from userprofile.models import Profile
 
@@ -15,9 +17,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
         user.set_password(validated_data["password"])
         user.save()
         profile = Profile.objects.create(id=user.pk, user=user)
-        blog = Blog.objects.create(id=user.pk, profile=profile)
+        Blog.objects.create(id=user.pk, profile=profile)
+        Form.objects.create(id=user.pk, profile=profile)
+        Album.objects.create(id=user.pk, profile=profile, name="It's me")
         print(profile.pk)
-        print(blog.pk)
         return user
 
 
