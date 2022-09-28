@@ -13,13 +13,13 @@ class Blog(models.Model):
         db_table = "Blog"
 
     def __str__(self):
-        return f"{self.profile}_blog"
+        return f"blog_{self.profile}"
 
 
 class Post(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, verbose_name="blog")
     content = models.TextField(verbose_name="content")
-    quiz = models.CharField(verbose_name="quiz", blank=True, null=True)
+    quiz = models.CharField(verbose_name="quiz", blank=True, null=True, max_length=250)
 
     class Meta:
         verbose_name = "Post"
@@ -31,7 +31,7 @@ class Post(models.Model):
 
 
 class PostComment(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, verbose_name="user")
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, verbose_name="user", null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name="post")
     content = models.TextField(verbose_name="content")
     comment = models.ForeignKey('PostComment', on_delete=models.CASCADE, verbose_name="comment_on_comment")
